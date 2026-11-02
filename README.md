@@ -63,7 +63,7 @@ The **founder photo** is in place (`web/src/assets/founder/anbu-saravanan.jpg`).
 `/privacy` and `/terms` are drafts. They are linked from the last line of the footer (© 2026 DataAPI Technologies Inc. All rights reserved. • Privacy Policy • Terms of Service). Have a lawyer review them before launch. They state plainly that the waitlist form doesn't send or store anything, so change them if that changes.
 - **Entity:** they name **DataAPI Technologies Inc.** (in `web/src/lib/legal.ts`) but no country, address or governing law, because none was given. Add them.
 - **Contact:** the site has no contact email, so both pages tell people to message Anbu on LinkedIn. Replace that with a real, monitored mailbox when there is one.
-- **Hosting:** they say Vercel hosts the site and keeps its request logs. Change that if it's deployed elsewhere.
+- **Hosting:** they say "our hosting provider" keeps request logs, without naming it. Keep it that way if you change host.
 
 ## Local setup
 

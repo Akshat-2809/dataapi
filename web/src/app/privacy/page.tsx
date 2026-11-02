@@ -68,17 +68,17 @@ const SECTIONS: LegalSection[] = [
       <>
         <p>Only where needed:</p>
         <ul>
-          <li><b>Vercel Inc.,</b> which hosts the website and keeps its request logs.</li>
+          <li><b>Our hosting provider,</b> which runs the website and keeps its request logs.</li>
           <li><b>Authorities and courts,</b> where the law requires it or to protect our legal rights.</li>
         </ul>
-        <p>Vercel may process these logs outside your country.</p>
+        <p>Our hosting provider may process these logs outside your country.</p>
       </>
     ),
   },
   {
     id: "how-long",
     title: "How long we keep it",
-    body: <p>Hosting logs are kept by Vercel for a short period under its own retention policy. We keep nothing else, because the form stores nothing.</p>,
+    body: <p>Hosting logs are kept by our hosting provider for a short period under its own retention policy. We keep nothing else, because the form stores nothing.</p>,
   },
   {
     id: "your-rights",
@@ -107,7 +107,7 @@ const SECTIONS: LegalSection[] = [
   {
     id: "other-sites",
     title: "Other websites",
-    body: <p>Some links lead elsewhere, including LinkedIn, YouTube and Product Hunt. Their own privacy policies apply there, not this one.</p>,
+    body: <p>Some links lead to other websites, such as our social profiles. Their own privacy policies apply there, not this one.</p>,
   },
   {
     id: "changes",
