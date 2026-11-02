@@ -1,0 +1,56 @@
+.head { padding-block: 72px 24px; }
+.headin { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
+.title { font-size: clamp(48px, 7.6vw, 104px); }
+.intro { font-size: 19px; color: var(--ink2); max-width: 58ch; }
+
+.page { padding-block: 40px 0; }
+
+/* the short version */
+.card { border-radius: 18px; background: var(--card); box-shadow: inset 0 0 0 1px var(--rule); overflow: hidden; }
+.cardHead { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; padding: 22px 26px; border-bottom: 1px solid var(--rule); }
+.cardHead h2 { font-size: clamp(28px, 3vw, 40px); }
+.rows { margin: 0; }
+.row { display: grid; grid-template-columns: 220px minmax(0, 1fr); border-bottom: 1px solid var(--rule); }
+.row:last-child { border-bottom: 0; }
+.row dt, .row dd { margin: 0; padding: 14px 26px; }
+.row dt { font-family: var(--mono); font-size: 11px; line-height: 1.55; padding-top: 18px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink3); box-shadow: inset -1px 0 0 var(--rule); }
+.row dd { color: var(--ink2); }
+.row dd a { color: var(--ink); }
+
+.layout { display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: 56px; align-items: start; margin-top: 56px; }
+
+.toc { position: sticky; top: calc(var(--nav-offset) + 24px); }
+.tocBox { border-radius: 18px; background: var(--card); padding: 18px 20px; box-shadow: inset 0 0 0 1px var(--rule); }
+.tocBox summary { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink3); cursor: pointer; list-style: none; margin-bottom: 10px; }
+.tocBox summary::-webkit-details-marker { display: none; }
+.tocBox ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.tocBox li + li a { border-top: 1px solid var(--rule); }
+.tocBox a { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 8px; align-items: baseline; padding: 8px 0; font-size: 14.5px; line-height: 1.35; font-weight: 500; color: var(--ink2); text-decoration: none; transition: color .2s, padding .25s var(--ease); }
+.tocBox a:hover { color: var(--ink); padding-left: 6px; }
+.tocNum { font-family: var(--mono); font-size: 11px; color: var(--ink3); }
+
+.doc { min-width: 0; display: flex; flex-direction: column; gap: 48px; color: var(--ink2); }
+.section { display: flex; flex-direction: column; gap: 14px; }
+.num { font-family: var(--mono); font-size: 12px; color: var(--sig); }
+.section h2 { font-size: clamp(28px, 3vw, 40px); color: var(--ink); text-wrap: pretty; }
+.section h3 { font-size: 22px; color: var(--ink); margin-top: 8px; letter-spacing: -.02em; }
+.section ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.section ul > li { position: relative; padding-left: 22px; }
+.section ul > li::before { content: ""; position: absolute; left: 2px; top: .72em; width: 10px; height: 2px; background: var(--sig); }
+.section b { color: var(--ink); font-weight: 600; }
+.section a { color: var(--ink); text-decoration-color: var(--ink3); text-underline-offset: 3px; }
+
+/* the part people need to find */
+.stuck { border-radius: 14px; padding: 18px 20px; background: var(--sigbg); box-shadow: inset 0 0 0 1.5px var(--sig); color: var(--ink); }
+
+@media (max-width: 960px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 32px; margin-top: 40px; }
+  .toc { position: static; }
+  .tocBox summary { margin-bottom: 0; }
+  .tocBox[open] summary { margin-bottom: 10px; }
+}
+@media (max-width: 620px) {
+  .row { grid-template-columns: minmax(0, 1fr); }
+  .row dt { box-shadow: none; padding-bottom: 0; }
+  .row dd { padding-top: 4px; }
+}

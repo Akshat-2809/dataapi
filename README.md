@@ -17,6 +17,7 @@ dataapi/
         │   ├── layout.tsx       fonts (next/font/google), metadata
         │   ├── globals.css      design tokens + shared classes
         │   ├── signup/          waitlist page (front end only)
+        │   ├── privacy/ terms/  legal pages (shared layout: components/LegalDoc.tsx)
         │   ├── api/health/      GET { status: "ok" }
         │   ├── not-found.tsx    styled 404
         │   └── opengraph-image.tsx, twitter-image.tsx, icon.svg, apple-icon.tsx, sitemap.ts, robots.ts
@@ -57,6 +58,13 @@ From the design's own README, still open:
 
 The **founder photo** is in place (`web/src/assets/founder/anbu-saravanan.jpg`). It was supplied as a circle on a dark background, so it's cropped to that circle (640×640) and shown round. Swap in the original if you have it.
 
+## Legal pages: review before launch
+
+`/privacy` and `/terms` are drafts. They are linked from the last line of the footer (© 2026 DataAPI Technologies Inc. All rights reserved. • Privacy Policy • Terms of Service). Have a lawyer review them before launch. They state plainly that the waitlist form doesn't send or store anything, so change them if that changes.
+- **Entity:** they name **DataAPI Technologies Inc.** (in `web/src/lib/legal.ts`) but no country, address or governing law, because none was given. Add them.
+- **Contact:** the site has no contact email, so both pages tell people to message Anbu on LinkedIn. Replace that with a real, monitored mailbox when there is one.
+- **Hosting:** they say Vercel hosts the site and keeps its request logs. Change that if it's deployed elsewhere.
+
 ## Local setup
 
 Requirements: Node 20.9 or later.
@@ -95,7 +103,7 @@ Compared in Chrome at 1440, 1024 and 390px. Same CSS values, same sections, same
 
 Intentional differences:
 - **Founder photo** replaces the `[Founder photo]` placeholder. The design's frame is 4:3, and a 4:3 crop of the supplied circular photo would cut off the top of his head, so the round portrait sits inside the design's striped 4:3 frame.
-- **No links to the existing app:** Sign in, AffordEx™ and the footer's Privacy, Terms, About, FAQ and Contact links are gone. "Get 1,000 credits", "Start building free" and "Claim 1,000 free credits" open `/signup`. "Launch live console" is now "Try the live demo". The footer links to sections of this page.
+- **No links to the existing app:** Sign in, AffordEx™ and the footer's About, FAQ and Contact links are gone. Privacy Policy and Terms of Service are pages on this site. "Get 1,000 credits", "Start building free" and "Claim 1,000 free credits" open `/signup`. "Launch live console" is now "Try the live demo". The footer links to sections of this page.
 - **Phone nav:** below 560px, Get 1,000 credits moves into the menu, so the logo and Menu stay on one row. In the design the buttons wrapped onto a second row of the sticky header. Below 1240px the open menu also takes its own row under the header, where the design pushed the buttons below it. Escape closes it, and the button reads "Close" while open.
 - **Race bars:** in the design, the `go` class that starts the bar race is also the class of the Recognize button, so the race would collapse into an 84px green circle once it played. CSS Modules scope the two apart. Without JavaScript the bars show at full length.
 - **Demo:** the token count counts up and the raw HTML wall highlights a few tags, as in `design/preview.html`. Output panels fade in on every switch.
@@ -103,4 +111,5 @@ Intentional differences:
 - **Comparison table** uses row headers, and the timeline, pipeline and founder facts use lists, for screen readers. They look the same.
 - **External links** (LinkedIn, YouTube, Product Hunt, marked ↗) open in a new tab.
 - **Anchors** land below the sticky nav.
-- **Pages added:** the `/signup` waitlist and a styled 404.
+- **Pages added:** the `/signup` waitlist, `/privacy`, `/terms` and a styled 404.
+- **Footer's last line** is "© 2026 DataAPI Technologies Inc. All rights reserved. • Privacy Policy • Terms of Service", in the body font. On phones the copyright takes its own line.

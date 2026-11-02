@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LEGAL_ENTITY } from "@/lib/legal";
 import { SOCIAL } from "@/lib/site";
 import styles from "./Footer.module.css";
 
@@ -61,8 +62,11 @@ export function Footer() {
           ))}
         </div>
         <div className={styles.legal}>
-          <span>© 2026 DataAPI · AutoEx™</span>
-          <Link href="/#top">Back to the top ↑</Link>
+          <span>© 2026 {LEGAL_ENTITY} All rights reserved.</span>
+          <span className={styles.dot} aria-hidden="true">•</span>
+          <Link href="/privacy">Privacy Policy</Link>
+          <span className={styles.dot} aria-hidden="true">•</span>
+          <Link href="/terms">Terms of Service</Link>
         </div>
       </div>
     </footer>
