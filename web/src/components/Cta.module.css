@@ -1,0 +1,12 @@
+/* CTA */
+.cta { border-radius: 28px; background: var(--sig); color: #FFFFFF; padding: clamp(32px, 6vw, 72px); display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 32px; align-items: end; position: relative; overflow: hidden; }
+.cta h2 { font-size: clamp(40px, 5.6vw, 80px); }
+.cta p { color: #E6FAF0; font-size: 18px; }
+.cta :global(.btn-ink) { background: #FFFFFF; color: var(--ink); }
+.cta a:focus-visible { outline-color: #FFFFFF; }
+.btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+
+@media (max-width: 960px) {
+  .cta { grid-template-columns: minmax(0, 1fr); }
+  .btns { justify-content: flex-start; }
+}

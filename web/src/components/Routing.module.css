@@ -1,0 +1,21 @@
+/* routing */
+.route { background: var(--dark); color: var(--on); }
+.route :global(.lab) { color: var(--on2); }
+.route :global(.lede) { color: var(--on2); }
+.pipe { list-style: none; margin: 48px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; align-items: stretch; }
+.st { border-radius: 16px; background: #171914; box-shadow: inset 0 0 0 1px #2A2D25; padding: 18px; display: flex; flex-direction: column; gap: 8px; position: relative; }
+.st b { font-family: var(--disp); font-size: 22px; letter-spacing: -.02em; }
+.t { font-family: var(--mono); font-size: 12px; color: #62D6A0; }
+.st p { font-size: 14px; color: var(--on2); }
+.st.split { gap: 10px; padding: 12px; background: transparent; box-shadow: none; }
+.tier { border-radius: 12px; padding: 14px; background: #171914; box-shadow: inset 0 0 0 1px #2A2D25; display: flex; flex-direction: column; gap: 4px; }
+.tier.a { box-shadow: inset 0 0 0 1.5px var(--sig); }
+.pct { font-family: var(--disp); font-size: 28px; letter-spacing: -.03em; }
+.flowdot { position: absolute; right: -10px; top: 50%; width: 8px; height: 8px; border-radius: 50%; background: var(--sig); transform: translateY(-50%); z-index: 2; animation: pulse 1.6s infinite; }
+
+@keyframes pulse { 50% { opacity: .3; } }
+
+@media (max-width: 960px) {
+  .pipe { grid-template-columns: minmax(0, 1fr); }
+  .flowdot { right: 50%; top: auto; bottom: -10px; transform: translateX(50%); }
+}

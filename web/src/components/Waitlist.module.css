@@ -1,0 +1,36 @@
+.page { padding-block: 72px 0; }
+.grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: start; }
+.intro { display: flex; flex-direction: column; gap: 22px; position: sticky; top: 110px; }
+.h1 { font-size: clamp(44px, 6vw, 88px); }
+.h1 span { color: var(--sig); }
+.perks { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; border-top: 1px solid var(--rule); }
+.perks li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.perks li::before { content: "✓"; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--sigbg); color: #00744A; font-size: 12px; font-weight: 600; transform: translateY(4px); }
+.perks b { font-weight: 600; }
+.perks span { display: block; font-size: 14.5px; color: var(--ink2); }
+
+/* the form card */
+.form { border-radius: 22px; background: var(--card); box-shadow: inset 0 0 0 1px var(--rule), 0 40px 80px -60px rgba(13,14,12,.6); padding: 28px; display: flex; flex-direction: column; gap: 20px; }
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field label, .flab { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink3); }
+.opt { text-transform: none; letter-spacing: 0; }
+.field input { min-height: 50px; border: 0; border-radius: 12px; background: var(--bg); box-shadow: inset 0 0 0 1px var(--rule); color: var(--ink); font: 400 16px var(--sans); padding: 0 14px; transition: box-shadow .2s; }
+.field input::placeholder { color: #8A8C85; }
+.field input:focus { outline: none; box-shadow: inset 0 0 0 2px var(--sig); }
+.field input[aria-invalid="true"] { box-shadow: inset 0 0 0 2px var(--hot); }
+.ferr { font-size: 14px; font-weight: 500; color: #C9401A; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button { min-height: 42px; padding: 0 13px; border-radius: 999px; border: 0; background: var(--bg); box-shadow: inset 0 0 0 1px var(--rule); font: 500 14px var(--sans); cursor: pointer; color: var(--ink); }
+.chips button.on { background: var(--ink); color: #FFFFFF; box-shadow: none; }
+.send { align-self: stretch; margin-top: 4px; }
+.fine { font-family: var(--mono); font-size: 11px; color: var(--ink3); text-align: center; }
+
+/* the thank-you */
+.done { gap: 16px; animation: sw .45s var(--ease) both; }
+.tick { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--sig); color: #FFFFFF; font-size: 24px; box-shadow: 0 0 0 8px rgba(0,168,107,.15); }
+.doneH { font-size: clamp(36px, 4vw, 52px); }
+
+@media (max-width: 960px) {
+  .grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .intro { position: static; }
+}

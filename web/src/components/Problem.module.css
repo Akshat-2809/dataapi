@@ -1,0 +1,19 @@
+/* why: bar race */
+.race { margin-top: 48px; display: flex; flex-direction: column; gap: 16px; }
+.rrow { display: grid; grid-template-columns: 200px minmax(0, 1fr) 150px; gap: 16px; align-items: center; }
+.nm b { display: block; font-weight: 600; }
+.nm span { font-family: var(--mono); font-size: 11px; color: var(--ink3); }
+.rbar { height: 44px; border-radius: 10px; background: rgba(13,14,12,.05); overflow: hidden; }
+.rbar i { display: block; height: 100%; border-radius: 10px; width: 0; transition: width 1.4s var(--ease); }
+.race.go .rbar i { width: var(--w); }
+.v { font-family: var(--mono); font-size: 13px; text-align: right; }
+.v b { display: block; font-family: var(--disp); font-size: 24px; letter-spacing: -.03em; }
+
+/* the bars are hidden before the animation only when JavaScript can play it */
+@media (scripting: none) {
+  .rbar i { width: var(--w); }
+}
+@media (max-width: 960px) {
+  .rrow { grid-template-columns: minmax(0, 1fr) 110px; }
+  .rbar { grid-column: 1 / -1; grid-row: 2; }
+}

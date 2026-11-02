@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AutoEx™ by DataAPI — Redesign concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Onest:wght@400;500;600&family=Martian+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#F6F5F0;--card:#FFFFFF;--ink:#0D0E0C;--ink2:#4A4C47;--ink3:#61645E;--rule:rgba(13,14,12,.12);--sig:#00A86B;--sigbg:#E3F6EC;--noise:#B9BAB3;--hot:#FF5B2E;--dark:#0D0E0C;--on:#EDEEE8;--on2:#A2A59C;--disp:'Bricolage Grotesque',system-ui,sans-serif;--sans:'Onest',system-ui,-apple-system,sans-serif;--mono:'Martian Mono',ui-monospace,monospace;--ease:cubic-bezier(.2,.8,.1,1)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}
+h1,h2,h3{margin:0;font-family:var(--disp);font-weight:700;letter-spacing:-.035em;line-height:1;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1220px;margin:0 auto;padding-inline:clamp(16px,4vw,48px)}
+.lab{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.h2{font-size:clamp(36px,5vw,68px)}
+.lede{font-size:19px;color:var(--ink2);max-width:58ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;border-radius:999px;font:600 15.5px var(--sans);text-decoration:none;border:0;cursor:pointer;transition:transform .3s var(--ease),background .2s}
+.btn-ink{background:var(--ink);color:#fff}.btn-ink:hover{transform:translateY(-2px)}
+.btn-sig{background:var(--sig);color:#fff}.btn-sig:hover{transform:translateY(-2px)}
+.btn-line{background:transparent;box-shadow:inset 0 0 0 1.5px var(--ink);color:var(--ink)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--sig);outline-offset:3px}
+code,.mono{font-family:var(--mono)}
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:rgba(246,245,240,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--rule)}
+.navin{display:flex;align-items:center;gap:22px;min-height:66px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo b{font-family:var(--disp);font-size:22px;letter-spacing:-.03em}
+.logo small{font-family:var(--mono);font-size:10.5px;padding:3px 7px;border-radius:999px;background:var(--sigbg);color:#00744A}
+.links{display:flex;gap:2px;flex:1;flex-wrap:nowrap;justify-content:center}
+.links a{text-decoration:none;font-size:14.5px;color:var(--ink2);padding:0 10px;white-space:nowrap;min-height:44px;display:inline-flex;align-items:center;gap:6px;border-radius:999px}
+.links a:hover{background:rgba(13,14,12,.06);color:var(--ink)}
+.new{font-family:var(--mono);font-size:9.5px;padding:2px 6px;border-radius:999px;background:var(--hot);color:#fff}
+.navr{display:flex;gap:8px;align-items:center}
+.menuBtn{display:none}
+/* HERO */
+.hero{padding-block:72px 40px}
+.kick{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;padding:7px 12px;border-radius:999px;background:var(--card);box-shadow:inset 0 0 0 1px var(--rule)}
+.kick i{width:8px;height:8px;border-radius:50%;background:var(--sig);box-shadow:0 0 0 4px rgba(0,168,107,.18)}
+.h1{font-size:clamp(48px,7.6vw,118px);margin-top:22px;max-width:14ch}
+.h1 .n{color:var(--noise);text-decoration:line-through;text-decoration-thickness:6px;text-decoration-color:var(--hot)}
+.h1 .s{color:var(--sig)}
+.hrow{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;flex-wrap:wrap;margin-top:26px}
+.hcta{display:flex;gap:10px;flex-wrap:wrap}
+/* noise → signal machine */
+.machine{margin-top:48px;border-radius:22px;background:var(--dark);color:var(--on);overflow:hidden;box-shadow:0 40px 80px -50px rgba(13,14,12,.7)}
+.mbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 18px;border-bottom:1px solid #24261F;flex-wrap:wrap}
+.mbar .url{flex:1;min-width:220px;display:flex;align-items:center;gap:10px;padding:0 14px;min-height:42px;border-radius:999px;background:#1A1C17;font-family:var(--mono);font-size:12px;color:var(--on2);overflow:hidden;white-space:nowrap}
+.samples{display:flex;gap:6px;flex-wrap:wrap}
+.samples button{min-height:40px;padding:0 12px;border-radius:999px;border:0;background:#1A1C17;color:var(--on2);font:500 13px var(--sans);cursor:pointer}
+.samples button.on{background:var(--on);color:var(--ink)}
+.panes{display:grid;grid-template-columns:minmax(0,1fr) 120px minmax(0,1fr);min-height:420px}
+.pane{padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.pane .ph{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.raw{flex:1;position:relative;overflow:hidden;border-radius:10px;background:#141611;font-family:var(--mono);font-size:10.5px;line-height:1.6;color:#5E6158;padding:12px;word-break:break-all;max-height:360px}
+.raw::after{content:"";position:absolute;left:0;right:0;bottom:0;height:80px;background:linear-gradient(transparent,#141611)}
+.raw span.k{color:#8A8D83}
+.raw .scroll{animation:rawscroll 22s linear infinite}
+.out{flex:1;border-radius:10px;background:#0F1A14;font-family:var(--mono);font-size:12.5px;line-height:1.7;color:#C9F2DC;padding:14px;white-space:pre-wrap;overflow:auto;max-height:360px;transition:opacity .4s}
+.out .hd{color:#62D6A0}
+.mid{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;border-inline:1px solid #24261F;padding:12px}
+.go{width:84px;height:84px;border-radius:50%;border:0;background:var(--sig);color:#fff;font:600 13px var(--sans);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 0 0 8px rgba(0,168,107,.15);transition:transform .3s var(--ease)}
+.go:hover{transform:scale(1.05)}
+.go small{font-family:var(--mono);font-size:10px;opacity:.85}
+.ms{font-family:var(--mono);font-size:11px;color:var(--on2);text-align:center}
+.tok{display:flex;align-items:baseline;gap:8px}
+.tok b{font-family:var(--disp);font-size:34px;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.tok span{font-family:var(--mono);font-size:11px;color:var(--on2)}
+.fmt{display:flex;gap:4px;padding:3px;border-radius:999px;background:#1A1C17}
+.fmt button{min-height:34px;padding:0 10px;border:0;border-radius:999px;background:transparent;color:var(--on2);font:500 12px var(--mono);cursor:pointer}
+.fmt button.on{background:#2A2D25;color:#fff}
+.mfoot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 18px;border-top:1px solid #24261F;font-family:var(--mono);font-size:11px;color:var(--on2)}
+/* stats ticker */
+.ticker{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:22px;border-radius:18px;background:var(--card);box-shadow:inset 0 0 0 1px var(--rule)}
+.tk{padding:22px;display:flex;flex-direction:column;gap:6px}
+.tk + .tk{box-shadow:inset 1px 0 0 var(--rule)}
+.tk b{font-family:var(--disp);font-size:clamp(34px,3.6vw,52px);letter-spacing:-.04em;line-height:1}
+.tk span{font-size:14.5px;color:var(--ink2)}
+/* SECTIONS */
+.sec{padding-block:120px}
+.shead{display:flex;flex-direction:column;gap:16px;max-width:820px}
+/* why: bar race */
+.race{margin-top:48px;display:flex;flex-direction:column;gap:16px}
+.rrow{display:grid;grid-template-columns:200px minmax(0,1fr) 150px;gap:16px;align-items:center}
+.rrow .nm b{display:block;font-weight:600}
+.rrow .nm span{font-family:var(--mono);font-size:11px;color:var(--ink3)}
+.rbar{height:44px;border-radius:10px;background:rgba(13,14,12,.05);overflow:hidden}
+.rbar i{display:block;height:100%;border-radius:10px;width:0;transition:width 1.4s var(--ease)}
+.race.go .rbar i{width:var(--w)}
+.rrow .v{font-family:var(--mono);font-size:13px;text-align:right}
+.rrow .v b{display:block;font-family:var(--disp);font-size:24px;letter-spacing:-.03em}
+/* outputs */
+.outs{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:40px;margin-top:48px;align-items:start}
+.olist{display:flex;flex-direction:column;border-top:1px solid var(--rule)}
+.oi{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;text-align:left;min-height:72px;padding:12px 4px;border:0;border-bottom:1px solid var(--rule);background:transparent;cursor:pointer;font:inherit;color:inherit;transition:padding .3s var(--ease)}
+.oi b{font-family:var(--disp);font-size:24px;letter-spacing:-.025em;font-weight:600}
+.oi small{display:block;font-size:14px;color:var(--ink3)}
+.oi .pill{font-family:var(--mono);font-size:11px;padding:4px 9px;border-radius:999px;background:rgba(13,14,12,.06)}
+.oi.on{padding-left:14px}
+.oi.on b{color:var(--sig)}
+.oi.on .pill{background:var(--sigbg);color:#00744A}
+.ocard{border-radius:18px;background:var(--card);box-shadow:inset 0 0 0 1px var(--rule);overflow:hidden}
+.ocard .top{display:flex;justify-content:space-between;gap:10px;padding:14px 18px;border-bottom:1px solid var(--rule);flex-wrap:wrap}
+.ocard pre{margin:0;padding:18px;font-family:var(--mono);font-size:12.5px;line-height:1.7;white-space:pre-wrap;color:#20231E;background:#FBFBF8;max-height:380px;overflow:auto}
+.ocard ul{margin:0;padding:16px 18px 18px 36px;color:var(--ink2);font-size:15px}
+/* routing */
+.route{background:var(--dark);color:var(--on)}
+.route .lab{color:var(--on2)}
+.route .lede{color:var(--on2)}
+.pipe{margin-top:48px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-items:stretch}
+.st{border-radius:16px;background:#171914;box-shadow:inset 0 0 0 1px #2A2D25;padding:18px;display:flex;flex-direction:column;gap:8px;position:relative}
+.st b{font-family:var(--disp);font-size:22px;letter-spacing:-.02em}
+.st .t{font-family:var(--mono);font-size:12px;color:#62D6A0}
+.st p{font-size:14px;color:var(--on2)}
+.st.split{gap:10px;padding:12px;background:transparent;box-shadow:none}
+.tier{border-radius:12px;padding:14px;background:#171914;box-shadow:inset 0 0 0 1px #2A2D25;display:flex;flex-direction:column;gap:4px}
+.tier.a{box-shadow:inset 0 0 0 1.5px var(--sig)}
+.tier .pct{font-family:var(--disp);font-size:28px;letter-spacing:-.03em}
+.flowdot{position:absolute;right:-10px;top:50%;width:8px;height:8px;border-radius:50%;background:var(--sig);transform:translateY(-50%);z-index:2;animation:pulse 1.6s infinite}
+/* calculator */
+.calc{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:32px;margin-top:48px;align-items:start}
+.ctl{border-radius:18px;background:var(--card);box-shadow:inset 0 0 0 1px var(--rule);padding:24px;display:flex;flex-direction:column;gap:20px}
+.ctl label{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{min-height:42px;padding:0 13px;border-radius:999px;border:0;background:var(--bg);box-shadow:inset 0 0 0 1px var(--rule);font:500 14px var(--sans);cursor:pointer;color:var(--ink)}
+.chips button.on{background:var(--ink);color:#fff;box-shadow:none}
+.res{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.rc{border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.rc.old{background:#EFEEE8;box-shadow:inset 0 0 0 1px var(--rule)}
+.rc.new{background:var(--sigbg);box-shadow:inset 0 0 0 1.5px var(--sig)}
+.rc b.big{font-family:var(--disp);font-size:clamp(40px,4.4vw,64px);letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.rc .kv{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding-top:8px;border-top:1px solid var(--rule)}
+.save{grid-column:1/-1;border-radius:18px;background:var(--ink);color:#fff;padding:22px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.save b{font-family:var(--disp);font-size:clamp(30px,3vw,44px);letter-spacing:-.03em;color:#62D6A0}
+/* MCP */
+.mcp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;margin-top:48px;align-items:start}
+.tools{display:flex;flex-wrap:wrap;gap:8px}
+.tools span{font-family:var(--mono);font-size:12.5px;padding:10px 14px;border-radius:10px;background:var(--card);box-shadow:inset 0 0 0 1px var(--rule)}
+.codecard{border-radius:18px;background:var(--dark);color:var(--on);overflow:hidden}
+.tabs{display:flex;gap:4px;padding:10px;border-bottom:1px solid #24261F;flex-wrap:wrap}
+.tabs button{min-height:38px;padding:0 12px;border-radius:999px;border:0;background:transparent;color:var(--on2);font:500 13px var(--sans);cursor:pointer}
+.tabs button.on{background:#2A2D25;color:#fff}
+.codecard pre{margin:0;padding:18px;font-family:var(--mono);font-size:12.5px;line-height:1.7;white-space:pre-wrap;color:#D6DACD;min-height:220px}
+.works{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.works span{font-size:13.5px;padding:6px 12px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--rule)}
+/* compare */
+.tblwrap{overflow-x:auto;margin-top:48px;border-radius:18px;box-shadow:inset 0 0 0 1px var(--rule);background:var(--card)}
+table{width:100%;min-width:760px;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:16px 18px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);font-weight:500}
+td.us{background:var(--sigbg);font-weight:600}
+th.us{background:var(--sigbg);color:#00744A}
+/* FOUNDER */
+.fd{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:40px;margin-top:48px;align-items:start}
+.fcard{border-radius:22px;background:var(--card);box-shadow:inset 0 0 0 1px var(--rule);padding:24px;display:flex;flex-direction:column;gap:18px;position:sticky;top:90px}
+.fph{aspect-ratio:4/3;border-radius:16px;background:repeating-linear-gradient(135deg,#ECEBE5 0 10px,#F3F2ED 10px 20px);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--ink3)}
+.fcard h3{font-size:38px}
+.fkv{display:flex;flex-direction:column;border-top:1px solid var(--rule)}
+.fkv div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:14.5px}
+.fkv span{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.book{display:grid;grid-template-columns:64px minmax(0,1fr);gap:14px;align-items:center;padding:14px;border-radius:14px;background:var(--bg)}
+.book .cv{aspect-ratio:3/4;border-radius:4px 8px 8px 4px;background:var(--ink);color:#62D6A0;display:flex;align-items:flex-end;padding:6px;font-family:var(--disp);font-size:11px;line-height:1;font-weight:700;box-shadow:inset 4px 0 0 rgba(255,255,255,.12)}
+.fstats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.fs{border-radius:18px;padding:20px;background:var(--card);box-shadow:inset 0 0 0 1px var(--rule);display:flex;flex-direction:column;gap:6px}
+.fs b{font-family:var(--disp);font-size:clamp(34px,3.4vw,48px);letter-spacing:-.04em;line-height:1;color:var(--sig)}
+.fs span{font-size:14.5px;color:var(--ink2)}
+.quote{border-radius:18px;background:var(--dark);color:#fff;padding:26px;font-family:var(--disp);font-size:clamp(24px,2.4vw,34px);letter-spacing:-.025em;line-height:1.15}
+.quote span{color:#62D6A0}
+.tl{position:relative;display:flex;flex-direction:column;margin-top:4px}
+.tl::before{content:"";position:absolute;left:7px;top:10px;bottom:10px;width:2px;background:var(--rule)}
+.tli{position:relative;display:grid;grid-template-columns:16px 110px minmax(0,1fr);gap:14px;padding:12px 0;align-items:start}
+.tli i{width:16px;height:16px;border-radius:50%;background:var(--card);box-shadow:inset 0 0 0 2px var(--ink3);margin-top:3px;z-index:1}
+.tli.now i{background:var(--sig);box-shadow:0 0 0 5px rgba(0,168,107,.18)}
+.tli .y{font-family:var(--mono);font-size:12px;color:var(--ink3);padding-top:2px}
+.tli b{display:block;font-weight:600}
+.tli p{font-size:14.5px;color:var(--ink2)}
+@media (max-width:960px){.fd{grid-template-columns:minmax(0,1fr)}.fcard{position:relative;top:0}.tli{grid-template-columns:16px minmax(0,1fr)}.tli .y{grid-column:2}}
+@media (max-width:560px){.fstats{grid-template-columns:minmax(0,1fr)}}
+/* CTA */
+.cta{border-radius:28px;background:var(--sig);color:#fff;padding:clamp(32px,6vw,72px);display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;align-items:end;position:relative;overflow:hidden}
+.cta h2{font-size:clamp(40px,5.6vw,80px)}
+.cta p{color:#E6FAF0;font-size:18px}
+.cta .btn-ink{background:#fff;color:var(--ink)}
+/* FOOTER */
+footer{padding-block:80px 30px;border-top:1px solid var(--rule);margin-top:120px}
+.fg{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(4,minmax(0,1fr));gap:28px}
+.fg h4{margin:0 0 12px;font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.fg ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.fg a{text-decoration:none;min-height:36px;display:inline-flex;align-items:center;font-size:15px;color:var(--ink2)}
+.fg a:hover{color:var(--ink)}
+.legal{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);font-family:var(--mono);font-size:11px;color:var(--ink3)}
+.legal a{text-decoration:none}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+@keyframes rawscroll{to{transform:translateY(-50%)}}
+@keyframes pulse{50%{opacity:.3}}
+@media (max-width:1240px){.links{display:none}.links.open{display:flex;flex-basis:100%;flex-direction:column;padding-bottom:10px;align-items:flex-start}.menuBtn{display:inline-flex}}
+@media (max-width:960px){
+.links{display:none}.links.open{display:flex;flex-basis:100%;flex-direction:column;padding-bottom:10px}
+.menuBtn{display:inline-flex}
+.panes{grid-template-columns:minmax(0,1fr)}
+.mid{flex-direction:row;border-inline:0;border-block:1px solid #24261F}
+.ticker{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tk:nth-child(3){box-shadow:inset 0 1px 0 var(--rule)}.tk:nth-child(4){box-shadow:inset 1px 1px 0 var(--rule)}
+.outs,.calc,.mcp,.cta{grid-template-columns:minmax(0,1fr)}
+.pipe{grid-template-columns:minmax(0,1fr)}
+.flowdot{right:50%;top:auto;bottom:-10px}
+.rrow{grid-template-columns:minmax(0,1fr) 110px}.rrow .rbar{grid-column:1/-1;grid-row:2}
+.fg{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sec{padding-block:88px}
+}
+@media (max-width:560px){.res{grid-template-columns:minmax(0,1fr)}.ticker{grid-template-columns:minmax(0,1fr)}.tk + .tk{box-shadow:inset 0 1px 0 var(--rule)}.fg{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+<div class="wrap navin">
+<a class="logo" href="#top" aria-label="DataAPI home">
+<svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="2" width="28" height="28" rx="8" fill="#0D0E0C"></rect><path d="M8 11h4M8 16h9M8 21h6" stroke="#61645E" stroke-width="2" stroke-linecap="round"></path><path d="M19 11h5M21 16h3M18 21h6" stroke="#00A86B" stroke-width="2.4" stroke-linecap="round"></path></svg>
+<b>DataAPI</b><small>AutoEx™</small>
+</a>
+<nav class="links" id="links" aria-label="Main">
+<a href="#engine">Engine</a>
+<a href="#formats">Formats</a>
+<a href="#calculator">Pricing</a>
+<a href="#mcp">MCP &amp; Docs</a>
+<a href="#compare">Compare</a>
+<a href="#founder">Founder</a>
+<a href="#">AffordEx™ <span class="new">New</span></a>
+</nav>
+<div class="navr">
+<a class="btn btn-line" href="#" style="min-height:42px">Sign in</a>
+<a class="btn btn-ink" href="#start" style="min-height:42px">Get 1,000 credits</a>
+<button class="btn btn-line menuBtn" id="menuBtn" aria-expanded="false" aria-controls="links" style="min-height:42px">Menu</button>
+</div>
+</div>
+</header>
+
+<main id="top">
+<section class="hero">
+<div class="wrap">
+<span class="kick"><i></i>Deterministic web content recognition · live on Product Hunt</span>
+<h1 class="h1"><span class="n">Raw DOM.</span> <span class="s">Pure signal.</span></h1>
+<div class="hrow">
+<p class="lede">AutoEx™ reads a web page the way your agent needs it: layout semantics and structure recognised in milliseconds, delivered as clean Markdown, JSON or TOON. No hallucinations. No fragile selectors.</p>
+<div class="hcta"><a class="btn btn-sig" href="#start">Start building free</a><a class="btn btn-line" href="#engine">Try it below</a></div>
+</div>
+
+<div class="machine" id="engine" aria-label="Interactive demo">
+<div class="mbar">
+<div class="url"><span style="color:#62D6A0">GET</span><span id="urlTxt">api.dataapi.live/autoex/get_people/?url=apple.com/leadership</span></div>
+<div class="samples" role="group" aria-label="Samples">
+<button class="on" data-s="0">Leadership</button><button data-s="1">Table</button><button data-s="2">Article</button>
+</div>
+</div>
+<div class="panes">
+<div class="pane">
+<div class="ph"><span class="lab" style="color:#A2A59C">Raw HTML · what most agents ingest</span></div>
+<div class="tok"><b id="rawTok" style="color:#FF7A55">28,000</b><span>tokens / page</span></div>
+<div class="raw" aria-hidden="true"><div class="scroll" id="rawText"></div></div>
+</div>
+<div class="mid">
+<button class="go" id="goBtn">Recognize<small>⚡ run</small></button>
+<span class="ms" id="msTxt">ready</span>
+</div>
+<div class="pane">
+<div class="ph"><span class="lab" style="color:#A2A59C">AutoEx™ output</span>
+<div class="fmt" role="group" aria-label="Format"><button class="on" data-f="toon">TOON_COMPACT</button><button data-f="json">JSON</button><button data-f="md">Markdown</button></div>
+</div>
+<div class="tok"><b id="outTok" style="color:#62D6A0">—</b><span id="outTokLab">press Recognize</span></div>
+<div class="out" id="outBox" aria-live="polite"><span style="color:#62645C">Output appears here.</span></div>
+</div>
+</div>
+<div class="mfoot"><span>Tier 1 fast socket · direct TLS</span><span>Concept demo · figures from DataAPI&#39;s published benchmarks</span></div>
+</div>
+
+<div class="ticker">
+<div class="tk"><b>97.6%</b><span>token reduction with TOON_COMPACT vs raw HTML</span></div>
+<div class="tk"><b>18 ms</b><span>direct-socket recognition latency</span></div>
+<div class="tk"><b>13</b><span>production gateways: 7 GET + 6 POST</span></div>
+<div class="tk"><b>0</b><span>CSS selectors to babysit. Self-adapting semantics.</span></div>
+</div>
+</div>
+</section>
+
+<section class="sec" style="padding-top:60px">
+<div class="wrap">
+<div class="shead rv">
+<span class="lab">The problem</span>
+<h2 class="h2">Your context window is full of tracking scripts.</h2>
+<p class="lede">Traditional scrapers dump full HTML, styles and SVG trees straight into prompt tokens. Same 100-row table, four ways of feeding it to an LLM:</p>
+</div>
+<div class="race rv" id="race">
+<div class="rrow"><div class="nm"><b>Raw HTML / DOM dump</b><span>baseline · 8,500 ms</span></div><div class="rbar"><i style="--w:100%;background:#FF5B2E"></i></div><div class="v"><b>28,000</b>tokens</div></div>
+<div class="rrow"><div class="nm"><b>Standard JSON</b><span>−85.0% · 22 ms</span></div><div class="rbar"><i style="--w:15%;background:#9A9D94"></i></div><div class="v"><b>4,200</b>tokens</div></div>
+<div class="rrow"><div class="nm"><b>TOON</b><span>−95.9% · 20 ms</span></div><div class="rbar"><i style="--w:4.1%;background:#4FC08D"></i></div><div class="v"><b>1,150</b>tokens</div></div>
+<div class="rrow"><div class="nm"><b>TOON_COMPACT</b><span>−97.6% · 18 ms</span></div><div class="rbar"><i style="--w:2.4%;background:#00A86B"></i></div><div class="v"><b>680</b>tokens</div></div>
+</div>
+</div>
+</section>
+
+<section class="sec" id="formats" style="padding-top:20px">
+<div class="wrap">
+<div class="shead rv">
+<span class="lab">Deliverables</span>
+<h2 class="h2">Pick the format. Get it in milliseconds.</h2>
+</div>
+<div class="outs">
+<div class="olist" id="olist">
+<button class="oi on" data-o="0"><span><b>Clean Markdown</b><small>For RAG, Claude Desktop, Cursor rules</small></span><span class="pill">24–180 ms</span></button>
+<button class="oi" data-o="1"><span><b>Deterministic JSON</b><small>Strictly typed, schema-guaranteed</small></span><span class="pill">typed</span></button>
+<button class="oi" data-o="2"><span><b>TOON Compact</b><small>Token-optimized object notation</small></span><span class="pill">−82.5%</span></button>
+<button class="oi" data-o="3"><span><b>POST Plain HTML</b><small>Send in-memory HTML from your own browser agent</small></span><span class="pill">0 ms fetch</span></button>
+</div>
+<div class="ocard">
+<div class="top"><span class="mono" style="font-size:12px" id="oEp">GET /autoex/get_md/?url=…</span><span class="lab" id="oFile">content.md</span></div>
+<pre id="oPre"></pre>
+<ul id="oList"></ul>
+</div>
+</div>
+</div>
+</section>
+
+<section class="sec route">
+<div class="wrap">
+<div class="shead rv">
+<span class="lab">Dual-tier routing</span>
+<h2 class="h2" style="color:#fff">Fast socket first. Browser only when it must.</h2>
+<p class="lede">Lightweight TLS sockets handle the page first. If client-side JavaScript hydration is needed, isolated Chromium workers take over automatically. Zero config.</p>
+</div>
+<div class="pipe rv">
+<div class="st"><span class="t">HTTP / MCP</span><b>Target URL</b><p>Or raw HTML you already have.</p><span class="flowdot"></span></div>
+<div class="st"><span class="t">2 ms</span><b>Ingress</b><p>Sniffer decides: static or SPA.</p><span class="flowdot"></span></div>
+<div class="st split">
+<div class="tier a"><span class="lab" style="color:#62D6A0">Tier 1 · fast socket</span><span class="pct">92%</span><span class="mono" style="font-size:12px;color:#A2A59C">⚡ 18 ms · 0.6 MB RAM</span></div>
+<div class="tier"><span class="lab">Tier 2 · Chromium</span><span class="pct">8%</span><span class="mono" style="font-size:12px;color:#A2A59C">~320 ms · full JS</span></div>
+</div>
+<div class="st"><span class="t">zero-selector</span><b>AST parser</b><p>Layout clustering, no CSS selectors.</p><span class="flowdot"></span></div>
+<div class="st" style="box-shadow:inset 0 0 0 1.5px #00A86B"><span class="t">−97.6% tokens</span><b>Clean payload</b><p>TOON, JSON or Markdown.</p></div>
+</div>
+</div>
+</section>
+
+<section class="sec" id="calculator">
+<div class="wrap">
+<div class="shead rv">
+<span class="lab">LLM cost calculator</span>
+<h2 class="h2">See what raw HTML is costing you.</h2>
+<p class="lede">Based on 28,000 tokens per raw page vs 680 with TOON_COMPACT, 30 days a month.</p>
+</div>
+<div class="calc">
+<div class="ctl">
+<div><label>Model</label><div class="chips" id="models">
+<button class="on" data-p="2">Claude Sonnet 5 · $2.00/1M</button><button data-p="5">Claude Opus 5 · $5.00/1M</button><button data-p="0.75">Gemini 3.8 Flash · $0.75/1M</button><button data-p="0.30">DeepSeek V4.1 Flash · $0.30/1M</button>
+</div></div>
+<div><label>Requests per day</label><div class="chips" id="vols">
+<button data-v="200">200 · solo</button><button class="on" data-v="2500">2,500 · agent fleet</button><button data-v="10000">10,000 · production</button><button data-v="25000">25,000 · scale</button>
+</div></div>
+<p class="lab" style="text-transform:none;letter-spacing:0;font-size:12px">Model prices as listed by DataAPI.</p>
+</div>
+<div class="res">
+<div class="rc old"><span class="lab">Raw DOM scraping</span><b class="big" id="oldCost">$4,200</b><span style="color:var(--ink2)">per month</span><div class="kv"><span>Per page</span><span class="mono">28,000 tokens</span></div><div class="kv"><span>Latency</span><span class="mono">8,500 ms</span></div></div>
+<div class="rc new"><span class="lab" style="color:#00744A">AutoEx™ TOON_COMPACT</span><b class="big" id="newCost">$102</b><span style="color:var(--ink2)">per month</span><div class="kv"><span>Per page</span><span class="mono">680 tokens</span></div><div class="kv"><span>Latency</span><span class="mono">18 ms</span></div></div>
+<div class="save"><span>Saved every month</span><b id="saveCost">$4,098</b><span class="mono" style="font-size:12px;color:#A2A59C">41× cost compression</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="sec" id="mcp" style="padding-top:20px">
+<div class="wrap">
+<div class="shead rv">
+<span class="lab">Model Context Protocol · AI agent ready</span>
+<h2 class="h2">Give any agent instant web context.</h2>
+<p class="lede">A native MCP server for Claude, Cursor, LangChain and autonomous agents. Your agent discovers the tools and gets structured TOON back in under 30 ms.</p>
+</div>
+<div class="mcp">
+<div style="display:flex;flex-direction:column;gap:22px">
+<div><span class="lab">7 production schemas</span><div class="tools" style="margin-top:10px"><span>extract_product</span><span>extract_tables</span><span>extract_people</span><span>extract_article</span><span>extract_list</span><span>read_webpage</span><span>search_web</span></div></div>
+<div><span class="lab">Works with</span><div class="works"><span>Claude Desktop</span><span>Cursor IDE</span><span>LangChain</span><span>CrewAI</span><span>AutoGen</span><span>LlamaIndex</span></div></div>
+<p style="color:var(--ink2)">Universal REST API too: cURL, Python, Node.js and Go, in three lines.</p>
+</div>
+<div class="codecard">
+<div class="tabs" id="ctabs"><button class="on" data-c="0">MCP config</button><button data-c="1">cURL</button><button data-c="2">Python</button></div>
+<pre id="cPre"></pre>
+</div>
+</div>
+</div>
+</section>
+
+<section class="sec" id="compare" style="padding-top:20px">
+<div class="wrap">
+<div class="shead rv">
+<span class="lab">Verified telemetry · 50,000 production pages</span>
+<h2 class="h2">Deterministic vs everything else.</h2>
+</div>
+<div class="tblwrap">
+<table>
+<thead><tr><th>Capability</th><th class="us">DataAPI direct recognition</th><th>Probabilistic AI scrapers</th><th>Traditional CSS / XPath</th></tr></thead>
+<tbody>
+<tr><td>Extraction determinism</td><td class="us">100% strict type &amp; schema guarantee</td><td>Probabilistic LLM extract</td><td>Fragile (regex / DOM tree)</td></tr>
+<tr><td>Selector maintenance</td><td class="us">0 hrs / month, self-adapting</td><td>Occasional prompt tuning</td><td>15–20 hrs / month</td></tr>
+<tr><td>Recognition latency (p95)</td><td class="us">18–32 ms, direct socket</td><td>800–1,500 ms</td><td>1,200–3,500 ms</td></tr>
+<tr><td>Token efficiency for LLMs</td><td class="us">Clean Markdown, zero noise</td><td>Raw HTML / standard Markdown</td><td>Full DOM bloat (300 KB+)</td></tr>
+<tr><td>Network architecture</td><td class="us">Fast TLS socket first + auto browser fallback</td><td>Headless browser for all requests</td><td>Single-thread Puppeteer cluster</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section class="sec" id="founder" style="padding-top:20px">
+<div class="wrap">
+<div class="shead rv">
+<span class="lab">Founder</span>
+<h2 class="h2">Built by someone who has extracted the web for over a decade.</h2>
+<p class="lede">AutoEx™ comes from years of building configurable extraction engines, from people directories across millions of sites to e-commerce catalogues in many languages.</p>
+</div>
+<div class="fd">
+<aside class="fcard">
+<div class="fph">[Founder photo]</div>
+<div style="display:flex;flex-direction:column;gap:4px"><h3>Anbu Saravanan</h3><span class="lab">Founder &amp; CTO · DataAPI</span></div>
+<div class="fkv">
+<div><span>Based</span>Navi Mumbai, India</div>
+<div><span>Building</span>DataAPI, since Sep 2025</div>
+<div><span>Before</span>Director, Course5i</div>
+<div><span>Studied</span>Valliammai Engineering College</div>
+</div>
+<div class="book"><div class="cv">A Cook&#39;s Perspective</div><div><span class="lab">Author</span><p style="font-weight:600;margin-top:4px">Artificial Intelligence: A Cook&#39;s Perspective</p></div></div>
+<a class="btn btn-line" href="https://www.linkedin.com/in/anbu-saravanan-a575b232/" style="align-self:flex-start">Connect on LinkedIn ↗</a>
+</aside>
+<div style="display:flex;flex-direction:column;gap:22px">
+<div class="fstats">
+<div class="fs"><b>13M</b><span>websites parsed for people information, at 85% accuracy, in a system he architected</span></div>
+<div class="fs"><b>300+</b><span>person-years a year saved through custom crawlers and automation tools</span></div>
+<div class="fs"><b>700+</b><span>websites designed and delivered by teams he directed</span></div>
+<div class="fs"><b>200+</b><span>team members upskilled through training he led</span></div>
+</div>
+<p class="quote">&#8220;LLMs don&#39;t need a browser&#39;s entire DOM tree. <span>They need structured perception.</span>&#8221;</p>
+<div>
+<span class="lab">Career, in extraction</span>
+<div class="tl">
+<div class="tli now"><i></i><span class="y">2025 – now</span><div><b>DataAPI · Founder &amp; CTO</b><p>Building AutoEx™, deterministic web content recognition for AI agents. Live on Product Hunt.</p></div></div>
+<div class="tli"><i></i><span class="y">2022 – 2025</span><div><b>Course5i · Director</b><p>A configurable platform pulling e-commerce listings and product detail within 30 minutes, with multi-language extraction and image object detection.</p></div></div>
+<div class="tli"><i></i><span class="y">2022</span><div><b>GoSharpener · CTO</b><p>Freelance.</p></div></div>
+<div class="tli"><i></i><span class="y">2021 – 2022</span><div><b>Course5i · Independent consultant</b><p>A config-driven common extraction engine: browser and non-browser requests, pagination, JSON APIs, live selector validation.</p></div></div>
+<div class="tli"><i></i><span class="y">2021</span><div><b>Springbord · Senior Manager, Technology</b><p>Built the MVP of a unified, configurable extraction platform for any website.</p></div></div>
+<div class="tli"><i></i><span class="y">2021</span><div><b>VeeTee Technologies · Principal Consultant</b><p>Large-scale SERP and Google Maps data pipelines.</p></div></div>
+<div class="tli"><i></i><span class="y">2019 – 2020</span><div><b>Merit · Technical Manager</b><p>Then Manager at Course5i in 2020.</p></div></div>
+<div class="tli"><i></i><span class="y">2014 – 2019</span><div><b>Scope e-Knowledge Center</b><p>Technical Innovation Manager and Senior R&amp;D Manager. Ethical crawling under every site&#39;s robots.txt.</p></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="start">
+<div class="wrap">
+<div class="cta rv">
+<div style="display:flex;flex-direction:column;gap:18px"><span class="lab" style="color:#E6FAF0">Early access batch open</span><h2>1,000 free credits. No card.</h2><p>All 13 production gateways, 17 ms direct sockets, the zero-proxy POST HTML stream and the native MCP server.</p></div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end"><a class="btn btn-ink" href="#">Claim 1,000 free credits</a><a class="btn" href="#engine" style="background:rgba(255,255,255,.16);color:#fff">Launch live console</a></div>
+</div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="wrap">
+<div class="fg">
+<div style="display:flex;flex-direction:column;gap:14px"><a class="logo" href="#top"><b>DataAPI</b><small>AutoEx™</small></a><p style="color:var(--ink2);font-size:15px;max-width:30ch">Deterministic web content recognition, engineered for AI agents and LLMs.</p></div>
+<div><h4>Product</h4><ul><li><a href="#">AutoEx™ structured extraction</a></li><li><a href="#">Plain HTML ingestion (POST)</a></li><li><a href="#">Scrape to clean Markdown</a></li><li><a href="#">Stealth headless browser pool</a></li></ul></div>
+<div><h4>Developers</h4><ul><li><a href="#">Docs &amp; quickstart</a></li><li><a href="#">API reference</a></li><li><a href="#">Live console</a></li><li><a href="#">TOON spec</a></li></ul></div>
+<div><h4>Company</h4><ul><li><a href="#founder">Founder</a></li><li><a href="#">About</a></li><li><a href="#">Pricing</a></li><li><a href="#">FAQ</a></li><li><a href="#">Contact</a></li></ul></div>
+<div><h4>Follow</h4><ul><li><a href="https://www.linkedin.com/company/dataapilive">LinkedIn</a></li><li><a href="https://www.youtube.com/@dataapi_live">YouTube</a></li><li><a href="https://www.producthunt.com/products/dataapi">Product Hunt</a></li></ul></div>
+</div>
+<div class="legal"><span>© 2026 DataAPI · AutoEx™</span><span><a href="#">Privacy</a> · <a href="#">Terms</a></span></div>
+</div>
+</footer>
+
+<script>
+(function(){
+  var menuBtn=document.getElementById('menuBtn'),links=document.getElementById('links');
+  menuBtn.addEventListener('click',function(){var o=links.classList.toggle('open');menuBtn.setAttribute('aria-expanded',o?'true':'false');});
+  links.addEventListener('click',function(e){if(e.target.tagName==='A'){links.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');}});
+
+  // raw noise
+  var noise='<div class="nav-wrapper js-sticky" data-track="hdr"><script src="/static/js/vendor.8f3a.js" async></'+'script><span class="k">&lt;svg viewBox="0 0 24 24"&gt;&lt;path d="M12 2L2 7l10 5 10-5-10-5z"/&gt;</span><style>.cookie-banner{position:fixed;z-index:9999}</style><div class="gdpr-overlay" aria-hidden="true"></div><span class="k">&lt;div class="css-1x8w9 e1qz4 ad-slot-728"&gt;</span><noscript><img src="//px.tracker/collect?id=88"></noscript><div class="leader-card"><img class="lazy" data-src="/i/42.webp"><h3 class="t">';
+  var raw=document.getElementById('rawText');
+  var s='';for(var i=0;i<14;i++){s+=noise.replace(/</g,'&lt;').replace(/&lt;span class="k"&gt;/g,'<span class="k">').replace(/&lt;\/span&gt;/g,'</span>');}
+  raw.innerHTML=s+s;
+
+  var samples=[
+    {url:'api.dataapi.live/autoex/get_people/?url=apple.com/leadership',raw:28000,
+     toon:'<span class="hd">@autoex:v3 entity="leadership" src="apple.com/leadership"</span>\n[team | name, title, role]\n1: "Tim Cook" | "CEO" | "Executive"\n2: "Craig Federighi" | "SVP Software" | "Executive"\n3: "Deirdre O\'Brien" | "SVP Retail" | "Executive"',
+     json:'{\n  "entity": "leadership",\n  "team": [\n    {"name": "Tim Cook", "title": "CEO"},\n    {"name": "Craig Federighi", "title": "SVP Software"},\n    {"name": "Deirdre O\'Brien", "title": "SVP Retail"}\n  ]\n}',
+     md:'<span class="hd"># Leadership</span>\n\n| Name | Title |\n|---|---|\n| Tim Cook | CEO |\n| Craig Federighi | SVP Software |\n| Deirdre O\'Brien | SVP Retail |'},
+    {url:'api.dataapi.live/autoex/get_tables/?url=…/cloud-market-share',raw:28000,
+     toon:'<span class="hd">@autoex:v3 topic="Q3 Cloud Infrastructure Market Share"</span>\n[cloud_providers | provider, revenue_b, growth]\nAWS | 28.4 | +19%\nAzure | 22.1 | +29%\nGoogle Cloud | 11.3 | +35%\nOracle | 3.2 | +52%\nAlibaba | 4.8 | +7%',
+     json:'{\n  "cloud_providers": [\n    {"provider": "AWS", "revenue_b": 28.4, "growth": "+19%"},\n    {"provider": "Azure", "revenue_b": 22.1, "growth": "+29%"},\n    {"provider": "Google Cloud", "revenue_b": 11.3, "growth": "+35%"}\n  ]\n}',
+     md:'<span class="hd">## Q3 Cloud Infrastructure Market Share</span>\n\n| Provider | Revenue ($B) | Growth |\n|---|---|---|\n| AWS | 28.4 | +19% |\n| Azure | 22.1 | +29% |\n| Google Cloud | 11.3 | +35% |'},
+    {url:'api.dataapi.live/autoex/get_md/?url=docs.docker.com/engine/install/',raw:28000,
+     toon:'<span class="hd">@autoex:v3 type="article" src="docs.docker.com"</span>\n[sections | heading, level]\n"Install Docker Engine" | 1\n"Supported Operating Systems" | 2\n"Quick Installation Script" | 2',
+     json:'{\n  "title": "Install Docker Engine",\n  "sections": [\n    "Supported Operating Systems",\n    "Quick Installation Script"\n  ]\n}',
+     md:'<span class="hd"># Install Docker Engine</span>\n\nLearn how to install Docker Engine on your operating system.\n\n<span class="hd">## Supported Operating Systems</span>\n\n| Distribution | Architecture |\n|---|---|\n| Ubuntu 24.04 LTS | x86_64, arm64 |'}
+  ];
+  var tokens={toon:680,json:4200,md:1150};
+  var tokLab={toon:'tokens · −97.6%',json:'tokens · −85.0%',md:'tokens · clean Markdown'};
+  var cur=0,fmt='toon',ran=false;
+  var outBox=document.getElementById('outBox'),outTok=document.getElementById('outTok'),outTokLab=document.getElementById('outTokLab'),msTxt=document.getElementById('msTxt');
+  function render(){var sm=samples[cur];document.getElementById('urlTxt').textContent=sm.url;if(!ran)return;outBox.innerHTML=sm[fmt];outTok.textContent=tokens[fmt].toLocaleString('en-US');outTokLab.textContent=tokLab[fmt];}
+  function count(el,to,dur){var st=performance.now(),from=0;function f(t){var p=Math.min(1,(t-st)/dur);el.textContent=Math.round(from+(to-from)*(1-Math.pow(1-p,3))).toLocaleString('en-US');if(p<1)requestAnimationFrame(f);}requestAnimationFrame(f);}
+  document.getElementById('goBtn').addEventListener('click',function(){ran=true;msTxt.textContent='18 ms';outBox.style.opacity=0;setTimeout(function(){render();outBox.style.opacity=1;count(outTok,tokens[fmt],600);},180);});
+  document.querySelectorAll('.samples button').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.samples button').forEach(function(x){x.classList.remove('on');});b.classList.add('on');cur=+b.dataset.s;render();});});
+  document.querySelectorAll('.fmt button').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.fmt button').forEach(function(x){x.classList.remove('on');});b.classList.add('on');fmt=b.dataset.f;render();});});
+  setTimeout(function(){if(!ran)document.getElementById('goBtn').click();},1600);
+
+  // outputs
+  var outs=[
+    {ep:'GET /autoex/get_md/?url=…',file:'content.md',pre:'# Install Docker Engine\n\nLearn how to install Docker Engine on your operating system.\n\n## Supported Operating Systems\n\n| Distribution | Architecture | Support Status |\n|---|---|---|\n| Ubuntu 24.04 LTS | x86_64, arm64 | Tier 1 (Active) |\n| Debian 12 (Bookworm) | x86_64, arm64 | Tier 1 (Active) |',li:['Pure semantic headings (# H1, ## H2, ### H3)','Links with anchor text preserved','Fenced code blocks with language identification','95%+ token reduction vs raw HTML']},
+    {ep:'GET /autoex/get_people/?url=…',file:'people.json',pre:'{\n  "entity": "leadership",\n  "team": [\n    {"name": "Tim Cook", "title": "CEO", "role": "Executive"},\n    {"name": "Craig Federighi", "title": "SVP Software", "role": "Executive"}\n  ]\n}',li:['Strictly typed output with schema guarantee','Zero LLM hallucinations','Six domain endpoints: Products, Articles, Tables, People, Lists, Markdown']},
+    {ep:'GET /autoex/get_list_plain/?url=…',file:'records.toon',pre:'@autoex:v3 topic="Q3 Cloud Infrastructure Market Share" date="2026-09-12"\n[cloud_providers | provider, revenue_b, growth]\nAWS | 28.4 | +19%\nAzure | 22.1 | +29%\nGoogle Cloud | 11.3 | +35%',li:['Eliminates punctuation and schema redundancy','Keeps full LLM reasoning accuracy','Leaves the context window open for reasoning']},
+    {ep:'POST /autoex/… (plain HTML body)',file:'request.sh',pre:'# Already have the page in Playwright or Puppeteer?\n# Send the in-memory HTML: no fetch, sub-15 ms DOM compression.\ncurl -X POST "https://api.dataapi.live/autoex/…" \\\n  -H "x-api-key: YOUR_API_KEY" \\\n  --data-binary @page.html',li:['Zero-proxy: nothing is fetched again','Pairs with your existing browser agent','6 POST streamers among the 13 gateways']}
+  ];
+  function showOut(i){var o=outs[i];document.getElementById('oEp').textContent=o.ep;document.getElementById('oFile').textContent=o.file;document.getElementById('oPre').textContent=o.pre;document.getElementById('oList').innerHTML=o.li.map(function(x){return '<li>'+x+'</li>';}).join('');document.querySelectorAll('.oi').forEach(function(b,j){b.classList.toggle('on',j===i);b.setAttribute('aria-pressed',j===i?'true':'false');});}
+  document.querySelectorAll('.oi').forEach(function(b){b.addEventListener('click',function(){showOut(+b.dataset.o);});});
+  showOut(0);
+
+  // calculator
+  var price=2,vol=2500;
+  function money(n){return '$'+Math.round(n).toLocaleString('en-US');}
+  function calc(){var m=vol*30;var o=m*28000*price/1e6,n=m*680*price/1e6;document.getElementById('oldCost').textContent=money(o);document.getElementById('newCost').textContent=money(n);document.getElementById('saveCost').textContent=money(o-n);}
+  function chipGroup(id,key,fn){document.querySelectorAll('#'+id+' button').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('#'+id+' button').forEach(function(x){x.classList.remove('on');});b.classList.add('on');fn(parseFloat(b.dataset[key]));calc();});});}
+  chipGroup('models','p',function(v){price=v;});chipGroup('vols','v',function(v){vol=v;});calc();
+
+  // code tabs
+  var codes=['{\n  "mcpServers": {\n    "dataapi": {\n      "command": "python3",\n      "args": ["-m", "dataapi_mcp"],\n      "env": {\n        "DATAAPI_KEY": "dapi_live_your_api_key",\n        "DATAAPI_BASE_URL": "https://api.dataapi.live"\n      }\n    }\n  }\n}','# Extract structured leadership profiles\ncurl -X GET "https://api.dataapi.live/autoex/get_people/?url=https://apple.com/leadership" \\\n  -H "x-api-key: YOUR_API_KEY"','import requests\n\nr = requests.get(\n    "https://api.dataapi.live/autoex/get_md/",\n    params={"url": "https://docs.docker.com/engine/install/"},\n    headers={"x-api-key": "YOUR_API_KEY"},\n)\nprint(r.text)'];
+  function showCode(i){document.getElementById('cPre').textContent=codes[i];document.querySelectorAll('#ctabs button').forEach(function(b,j){b.classList.toggle('on',j===i);});}
+  document.querySelectorAll('#ctabs button').forEach(function(b){b.addEventListener('click',function(){showCode(+b.dataset.c);});});showCode(0);
+
+  // reveal
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');if(e.target.id==='race')e.target.classList.add('go');io.unobserve(e.target);}});},{threshold:.2});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>

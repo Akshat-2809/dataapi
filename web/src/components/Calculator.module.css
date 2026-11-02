@@ -1,0 +1,22 @@
+/* calculator */
+.calc { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 32px; margin-top: 48px; align-items: start; }
+.ctl { border-radius: 18px; background: var(--card); box-shadow: inset 0 0 0 1px var(--rule); padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+.clab { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink3); display: block; margin-bottom: 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button { min-height: 42px; padding: 0 13px; border-radius: 999px; border: 0; background: var(--bg); box-shadow: inset 0 0 0 1px var(--rule); font: 500 14px var(--sans); cursor: pointer; color: var(--ink); }
+.chips button.on { background: var(--ink); color: #FFFFFF; box-shadow: none; }
+.res { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.rc { border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 10px; }
+.rc.old { background: #EFEEE8; box-shadow: inset 0 0 0 1px var(--rule); }
+.rc.new { background: var(--sigbg); box-shadow: inset 0 0 0 1.5px var(--sig); }
+.big { font-family: var(--disp); font-size: clamp(40px, 4.4vw, 64px); letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.kv { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; padding-top: 8px; border-top: 1px solid var(--rule); }
+.save { grid-column: 1 / -1; border-radius: 18px; background: var(--ink); color: #FFFFFF; padding: 22px 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.save b { font-family: var(--disp); font-size: clamp(30px, 3vw, 44px); letter-spacing: -.03em; color: #62D6A0; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 960px) {
+  .calc { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .res { grid-template-columns: minmax(0, 1fr); }
+}
